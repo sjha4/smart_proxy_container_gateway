@@ -1,6 +1,8 @@
 require 'test/unit'
 $LOAD_PATH << File.join(__dir__, '..', 'lib')
 
+ENV['RACK_ENV'] = 'test'
+
 # Workaround: sinatra/main.rb parses ARGV at require time and exits on -v.
 # Clear ARGV before loading to prevent OptionParser from intercepting test flags.
 saved_argv = ARGV.dup

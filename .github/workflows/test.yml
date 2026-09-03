@@ -54,19 +54,6 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: true
 
-      - name: List test files
-        run: find test -name "*_test.rb" -type f
-
-      - name: Verify PostgreSQL connection
-        run: |
-          PGPASSWORD=postgres psql -h localhost -U postgres -d container_gateway_test -c "SELECT version();"
-
-      - name: Run tests with verbose output
-        run: |
-          echo "Running tests with DATABASE_URL=$DATABASE_URL"
-          bundle exec ruby -Ilib:test -e "Dir['test/**/*_test.rb'].each { |f| puts \"Loading #{f}\"; require_relative f }"
-        continue-on-error: true
-
       - name: Run tests
         run: |
           echo "Running tests with DATABASE_URL=$DATABASE_URL"

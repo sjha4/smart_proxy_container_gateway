@@ -22,3 +22,5 @@ jobs:
     name: Tests
     needs: rubocop
     uses: theforeman/actions/.github/workflows/smart_proxy_plugin.yml@v0
+    with:
+      database: postgres

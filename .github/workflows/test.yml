@@ -39,8 +39,10 @@ jobs:
           --health-retries 5
 
     env:
+      CI: true
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/container_gateway_test
       SMART_PROXY_BRANCH: develop
+      RACK_ENV: test
 
     steps:
       - name: Checkout code
@@ -52,5 +54,11 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: true
 
+      - name: List test files
+        run: find test -name "*_test.rb" -type f
+
       - name: Run tests
-        run: bundle exec rake test
+        run: |
+          echo "Running tests with DATABASE_URL=$DATABASE_URL"
+          bundle exec rake test
+          echo "Tests completed"

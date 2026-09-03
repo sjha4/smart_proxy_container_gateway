@@ -6,7 +6,6 @@ require 'smart_proxy_container_gateway/database'
 
 # rubocop:disable Metrics/AbcSize
 class ContainerGatewayBackendTest < Test::Unit::TestCase
-
   def setup
     Proxy::ContainerGateway::Plugin.load_test_settings(:db_connection_string => ENV['DATABASE_URL'],
                                                        :db_max_connections => 20,

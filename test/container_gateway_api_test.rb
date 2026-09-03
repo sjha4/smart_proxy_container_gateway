@@ -2,13 +2,12 @@ require 'test_helper'
 require 'webmock/test_unit'
 require 'rack/test'
 require 'mocha/test_unit'
+require 'smart_proxy_container_gateway/container_gateway'
+require 'smart_proxy_container_gateway/container_gateway_api'
+require 'smart_proxy_container_gateway/database'
 
 class ContainerGatewayApiTest < Test::Unit::TestCase
   include Rack::Test::Methods
-
-  require 'smart_proxy_container_gateway/container_gateway'
-  require 'smart_proxy_container_gateway/container_gateway_api'
-  require 'smart_proxy_container_gateway/database'
 
   def app
     Proxy::ContainerGateway::Api.new

@@ -1,11 +1,11 @@
 require 'test_helper'
 require 'mocha/test_unit'
+require 'smart_proxy_container_gateway/container_gateway'
+require 'smart_proxy_container_gateway/container_gateway_api'
+require 'smart_proxy_container_gateway/database'
 
 # rubocop:disable Metrics/AbcSize
 class ContainerGatewayBackendTest < Test::Unit::TestCase
-  require 'smart_proxy_container_gateway/container_gateway'
-  require 'smart_proxy_container_gateway/container_gateway_api'
-  require 'smart_proxy_container_gateway/database'
 
   def setup
     Proxy::ContainerGateway::Plugin.load_test_settings(:db_connection_string => ENV['DATABASE_URL'],

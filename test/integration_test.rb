@@ -14,6 +14,7 @@ class ContainerGatewayApiFeaturesTest < Test::Unit::TestCase
     Proxy::RootV2Api.new
   end
 
+  # rubocop:disable Metrics/AbcSize
   def test_features
     Proxy::DefaultModuleLoader.any_instance.expects(:load_configuration_file)
                               .with('container_gateway.yml')
@@ -25,6 +26,11 @@ class ContainerGatewayApiFeaturesTest < Test::Unit::TestCase
 
     get '/features'
 
+    # Debug output for CI
+    logger.debug "Response status: #{last_response.status}"
+    logger.debug "Response body (first 500 chars): #{last_response.body[0..500].inspect}"
+    logger.debug "Response content-type: #{last_response.content_type}"
+
     response = JSON.parse(last_response.body)
 
     mod = response['container_gateway']
@@ -33,4 +39,5 @@ class ContainerGatewayApiFeaturesTest < Test::Unit::TestCase
     assert_equal([], mod['capabilities'])
     assert_equal({}, mod['settings'])
   end
+  # rubocop:enable Metrics/AbcSize
 end
